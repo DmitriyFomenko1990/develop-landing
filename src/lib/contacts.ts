@@ -3,8 +3,8 @@ export const CONTACTS = {
   telegramUser: "oknemof",
   telegramUrl: "https://t.me/oknemof",
   whatsappUrl: "https://wa.me/79889537771",
-  email: "fomenkodmitriy1990@gmail.com",
-  emailUrl: "mailto:fomenkodmitriy1990@gmail.com",
+  email: "oknemofd@gmail.com",
+  emailUrl: "mailto:oknemofd@gmail.com",
   easybrandUrl: "https://easybrandhub.ru",
 } as const;
 

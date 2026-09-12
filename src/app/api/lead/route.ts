@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { telegramDraftUrl } from "@/lib/contacts";
-import { formatLeadMessage } from "@/lib/lead";
+import { formatLeadMessage, sendLeadEmail } from "@/lib/lead";
 
 export async function POST(request: Request) {
   try {
@@ -34,38 +34,16 @@ export async function POST(request: Request) {
     }
 
     const text = formatLeadMessage({ name, contact, task });
-    const token = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
-
-    if (!token || !chatId) {
-      return NextResponse.json({
-        ok: true,
-        fallback: true,
-        telegramUrl: telegramDraftUrl(text),
-      });
+    const emailed = await sendLeadEmail(text);
+    if (emailed) {
+      return NextResponse.json({ ok: true, fallback: false });
     }
 
-    const telegramResponse = await fetch(
-      `https://api.telegram.org/bot${token}/sendMessage`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text,
-        }),
-      },
-    );
-
-    if (!telegramResponse.ok) {
-      return NextResponse.json({
-        ok: true,
-        fallback: true,
-        telegramUrl: telegramDraftUrl(text),
-      });
-    }
-
-    return NextResponse.json({ ok: true, fallback: false });
+    return NextResponse.json({
+      ok: true,
+      fallback: true,
+      telegramUrl: telegramDraftUrl(text),
+    });
   } catch {
     return NextResponse.json(
       { ok: false, error: "Не получилось отправить. Напишите в мессенджер." },
