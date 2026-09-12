@@ -29,6 +29,13 @@ export const metadata: Metadata = {
   title: "Сайт целиком — от идеи до открытия",
   description:
     "Одна команда: поможем выбрать вид, соберём сайт и откроем по вашей ссылке. Лендинг от 15 000 ₽, разработка от 50 000 ₽.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/apple-icon.png" }],
+  },
   openGraph: {
     title: "Сайт целиком — от идеи до открытия",
     description:
