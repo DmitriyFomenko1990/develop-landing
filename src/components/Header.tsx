@@ -6,8 +6,8 @@ import { GearMark } from "@/components/GearMark";
 import { CONTACTS } from "@/lib/contacts";
 
 const links = [
-  { href: "#capabilities", label: "Что делаем" },
-  { href: "#process", label: "Как идём" },
+  { href: "#capabilities", label: "Что берём" },
+  { href: "#process", label: "Как делаем" },
   { href: "#case", label: "Пример" },
   { href: "#pricing", label: "Цены" },
 ];
@@ -46,7 +46,7 @@ export function Header() {
             whileHover={reduced ? undefined : { y: -1 }}
             whileTap={reduced ? undefined : { scale: 0.98 }}
           >
-            Получить разбор
+            Написать, что нужно
           </motion.a>
         </div>
       </div>

@@ -6,7 +6,7 @@ import { Reveal } from "@/components/Reveal";
 
 const facts = [
   { title: "Витрина", text: "Каталог и корзина под именем продавца" },
-  { title: "Заявки", text: "В кабинет и в Telegram" },
+  { title: "Заявки", text: "В кабинет и в мессенджер" },
   { title: "Адрес", text: "easybrandhub.ru — можно открыть сейчас" },
 ];
 
@@ -22,8 +22,8 @@ export function Case() {
             EasyBrand — магазин, который уже можно открыть.
           </h2>
           <p className="editorial mx-auto mt-6 max-w-xl text-muted">
-            Живой продукт, не макет. Продавец получает витрину под своим именем —
-            каталог, корзина, заявки в кабинет и Telegram.
+            Живой продукт, не макет. От витрины до заявок в кабинет и мессенджер —
+            продавец получает магазин под своим именем.
           </p>
         </Reveal>
 
@@ -40,8 +40,8 @@ export function Case() {
               <div className="p-6 md:p-8">
                 <p className="eyebrow text-bronze">можно открыть</p>
                 <p className="mt-5 max-w-xl text-[16px] leading-[1.38] text-muted">
-                  Так выглядит работа, которую отдаём по адресу. Не конструктор
-                  и не витрина на чужой площадке.
+                  Так выглядит работа, которую доводим до адреса. Магазин
+                  под именем продавца — его можно открыть сейчас.
                 </p>
                 <ul className="mt-8 space-y-4">
                   {facts.map((fact) => (

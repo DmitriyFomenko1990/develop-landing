@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     }
     if (contact.length < 3 || contact.length > 120) {
       return NextResponse.json(
-        { ok: false, error: "Укажите Telegram, телефон или почту" },
+        { ok: false, error: "Укажите мессенджер, телефон или почту" },
         { status: 400 },
       );
     }

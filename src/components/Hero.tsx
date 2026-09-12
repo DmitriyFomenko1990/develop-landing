@@ -29,10 +29,7 @@ export function Hero() {
 
         <h1 className="display max-w-4xl">
           <motion.span className="block" variants={reduced ? undefined : fadeUp}>
-            Сайт, с которого пишут.
-          </motion.span>
-          <motion.span className="block" variants={reduced ? undefined : fadeUp}>
-            На вашем домене.
+            Одна команда — от идеи до открытия.
           </motion.span>
         </h1>
 
@@ -40,8 +37,9 @@ export function Hero() {
           className="mt-6 max-w-150 text-base leading-[1.38] text-muted"
           variants={reduced ? undefined : fadeUp}
         >
-          Соберём лендинг или сайт компании: форма, Telegram, адрес, который
-          можно открыть и отправить. Код остаётся у вас — не аренда конструктора.
+          Не нужно искать отдельно, кто нарисует, кто соберёт и кто выложит.
+          Берём задачу с нуля: сайт, связь с другими сервисами, уведомления,
+          боты. Пишете нам — ведём до рабочей ссылки.
         </motion.p>
 
         <motion.a
@@ -51,21 +49,22 @@ export function Hero() {
           whileHover={reduced ? undefined : { y: -1 }}
           whileTap={reduced ? undefined : { scale: 0.98 }}
         >
-          Получить разбор
+          Написать, что нужно
         </motion.a>
 
         <motion.p
           className="mt-4 max-w-md text-[14px] leading-[1.4] text-subtle"
           variants={reduced ? undefined : fadeUp}
         >
-          Напишете задачу — ответим и назовём ориентир по цене и сроку этапа.
+          Напишите задачу своими словами. Ответим и скажем, с чего начать
+          и сколько это примерно будет.
         </motion.p>
 
         <motion.p
           className="eyebrow mt-14"
           variants={reduced ? undefined : fadeUp}
         >
-          Что уходит к вам на запуске
+          Что берём на себя
         </motion.p>
 
         <motion.div

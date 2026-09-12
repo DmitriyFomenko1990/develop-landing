@@ -1,5 +1,5 @@
 export const CONTACTS = {
-  brand: "OKNEMOF",
+  brand: "OKNEMOFF",
   telegramUser: "oknemof",
   telegramUrl: "https://t.me/oknemof",
   whatsappUrl: "https://wa.me/79889537771",

@@ -58,12 +58,12 @@ export function Lead() {
     <section id="lead" className="px-5 py-20">
       <div className="page-wrap grid gap-12 lg:grid-cols-2">
         <Reveal>
-          <p className="eyebrow">Разбор</p>
+          <p className="eyebrow">Написать</p>
           <h2 className="display-sm mt-4">
-            Напишите задачу — разберём и назовём этап.
+            Напишите, что нужно — разберёмся и скажем, с чего начать.
           </h2>
           <p className="mt-5 max-w-md text-[16px] leading-[1.38] text-muted">
-            Ответим в Telegram. Можно сразу написать в мессенджер или на почту,
+            Ответим в мессенджере. Можно сразу написать туда или на почту,
             без формы.
           </p>
           <div className="mt-8 flex flex-col gap-3 text-[14px]">
@@ -107,7 +107,7 @@ export function Lead() {
               />
             </label>
             <label className="mt-4 block text-[12px] font-semibold uppercase tracking-[0.071em] text-muted">
-              Telegram, телефон или почта
+              Мессенджер, телефон или почта
               <input
                 name="contact"
                 required
@@ -134,7 +134,7 @@ export function Lead() {
               whileHover={reduced ? undefined : { opacity: 0.88 }}
               whileTap={reduced ? undefined : { scale: 0.98 }}
             >
-              {status === "sending" ? "Отправляем…" : "Отправить на разбор"}
+              {status === "sending" ? "Отправляем…" : "Написать, что нужно"}
             </motion.button>
             <p className="mt-4 text-[12px] leading-relaxed text-subtle">
               Отправляя форму, вы соглашаетесь на обработку данных, чтобы вам
@@ -153,7 +153,7 @@ export function Lead() {
                   exit={reduced ? undefined : { opacity: 0 }}
                   transition={{ duration: 0.35, ease: easeOut }}
                 >
-                  Заявка ушла. Если открылся Telegram — отправьте черновик.
+                  Заявка ушла. Если открылся мессенджер — отправьте черновик.
                 </motion.p>
               ) : null}
               {status === "error" ? (

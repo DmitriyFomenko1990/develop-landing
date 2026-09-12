@@ -13,7 +13,7 @@ export function Footer() {
           <p className="mt-3 text-[12px] font-semibold uppercase tracking-[0.071em] text-ink">
             ИП Фоменко
           </p>
-          <p className="mt-2">Сайты под заявки. Код и адрес — ваши.</p>
+          <p className="mt-2">Сайт от вида до рабочей ссылки. Одна команда.</p>
         </div>
         <div className="flex flex-wrap gap-5">
           <a

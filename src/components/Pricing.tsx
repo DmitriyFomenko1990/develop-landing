@@ -9,19 +9,13 @@ const items = [
   {
     name: "Лендинг",
     value: 15000,
-    text: "Одна страница под услугу или акцию: форма, выкладка на ваш домен. Точный состав — после разбора.",
+    text: "Одна страница: вид, сборка, выкладка на ваш адрес. Точный состав — после разговора.",
   },
   {
     name: "Разработка",
     value: 50000,
-    text: "Сайт компании, магазин, сервис или доработка. Смету этапа даём после разбора, не по двум фразам.",
+    text: "Сайт компании, магазин, сервис, подключения или доработка. Смету куска работы даём после разговора, не по двум фразам.",
   },
-];
-
-const refused = [
-  "Tilda, WordPress, Bitrix «под ключ»",
-  "Срок «вчера» и дешёвый фикс без разбора",
-  "Долгая поддержка чужого кода без нормального входа",
 ];
 
 export function Pricing() {
@@ -59,19 +53,6 @@ export function Pricing() {
             </motion.article>
           ))}
         </motion.div>
-        <Reveal delay={0.08}>
-          <div className="card-surface mt-6 p-6">
-            <p className="eyebrow">Не берём</p>
-            <ul className="mt-5 space-y-3 text-[14px] leading-[1.4] text-ink">
-              {refused.map((line) => (
-                <li key={line} className="flex gap-3">
-                  <span className="mt-1.75 h-1.5 w-1.5 shrink-0 rounded-full bg-bronze" />
-                  {line}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
