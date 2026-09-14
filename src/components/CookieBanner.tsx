@@ -19,6 +19,14 @@ export function CookieBanner() {
     setChoice(readConsent() || "unknown");
   }, []);
 
+  useEffect(() => {
+    const open = choice === "unknown";
+    document.body.classList.toggle("has-cookie-banner", open);
+    return () => {
+      document.body.classList.remove("has-cookie-banner");
+    };
+  }, [choice]);
+
   function decide(next: ConsentChoice) {
     writeConsent(next);
     setChoice(next);
@@ -47,7 +55,7 @@ ym(${METRIKA_ID}, "init", {
           <motion.div
             role="dialog"
             aria-label="Согласие на cookie"
-            className="fixed inset-x-0 bottom-0 z-40 px-5 pb-5"
+            className="fixed inset-x-0 bottom-0 z-40 px-(--page-gutter) pb-[max(1.25rem,env(safe-area-inset-bottom))]"
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={reduced ? undefined : { opacity: 0, y: 12 }}
@@ -71,7 +79,7 @@ ym(${METRIKA_ID}, "init", {
                 </button>
                 <button
                   type="button"
-                  className="btn-fill cursor-pointer px-5 py-2.5 text-[12px]"
+                  className="btn-fill btn-fill-compact"
                   onClick={() => decide("accepted")}
                 >
                   Принять

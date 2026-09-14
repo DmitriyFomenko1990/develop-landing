@@ -3,7 +3,7 @@ import { CONTACTS } from "@/lib/contacts";
 
 export function Footer() {
   return (
-    <footer className="border-t border-line px-5 py-10">
+    <footer className="border-t border-line py-10">
       <div className="page-wrap flex flex-col gap-6 text-[14px] text-muted md:flex-row md:items-end md:justify-between">
         <div>
           <p className="wordmark inline-flex items-center gap-2">

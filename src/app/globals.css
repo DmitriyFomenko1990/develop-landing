@@ -7,7 +7,7 @@ html[data-theme="ember"] {
   --color-surface: #16120e;
   --color-ink: #f6e6d4;
   --color-muted: #c4a48c;
-  --color-subtle: #8a6a58;
+  --color-subtle: #b89578;
   --color-steel: #6a5348;
   --color-brass: #c6a15b;
   --color-brass-light: #e8c98a;
@@ -38,6 +38,7 @@ html[data-theme="ember"] {
   );
   --font-display-active: var(--font-display-face);
   --page-max-width: 1200px;
+  --page-gutter: 20px;
 }
 
 @theme inline {
@@ -70,8 +71,19 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   font-size: 16px;
-  line-height: 1.38;
+  line-height: 1.5;
   letter-spacing: 0.013em;
+}
+
+body.has-cookie-banner {
+  padding-bottom: 8rem;
+}
+
+header,
+footer,
+main > section,
+main.page-wrap {
+  padding-inline: var(--page-gutter);
 }
 
 ::selection {
@@ -81,6 +93,7 @@ body {
 
 .page-wrap {
   margin-inline: auto;
+  width: 100%;
   max-width: var(--page-max-width);
 }
 
@@ -91,6 +104,7 @@ body {
   line-height: 1;
   text-transform: uppercase;
   color: var(--color-ink);
+  flex-shrink: 0;
 }
 
 .nav-rail {
@@ -133,12 +147,55 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.16em;
     line-height: 1.1;
     text-transform: uppercase;
     color: var(--color-brass);
+  }
+
+  .btn-fill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border-radius: var(--radius-btn);
+    background: var(--metal);
+    padding: 14px 28px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1a1008;
+    cursor: pointer;
+    box-shadow: var(--glow-cta), inset 0 1px 0 rgb(255 255 255 / 0.28);
+    animation: flicker 3.6s ease-in-out infinite;
+    touch-action: manipulation;
+  }
+
+  .btn-fill-compact {
+    padding: 8px 10px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--color-brass);
+    padding: 13px 27px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brass);
+    cursor: pointer;
+    touch-action: manipulation;
   }
 }
 
@@ -154,59 +211,44 @@ body {
 .display {
   font-family: var(--font-display-active), ui-sans-serif, sans-serif;
   font-weight: 800;
-  font-size: clamp(2.6rem, 7vw, 4.25rem);
-  line-height: 0.96;
+  font-size: clamp(1.7rem, 6.6vw, 4.25rem);
+  line-height: 1.08;
   letter-spacing: 0.01em;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .display-sm {
   font-family: var(--font-display-active), ui-sans-serif, sans-serif;
   font-weight: 800;
-  font-size: clamp(2rem, 5vw, 3rem);
-  line-height: 1;
+  font-size: clamp(1.75rem, 5.2vw, 3rem);
+  line-height: 1.08;
   letter-spacing: 0.014em;
 }
 
 .editorial {
   font-family: var(--font-serif), ui-serif, Georgia, serif;
-  font-size: 22px;
+  font-size: clamp(1.125rem, 2.4vw, 1.375rem);
   font-weight: 400;
   line-height: 1.55;
 }
 
-.btn-fill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-btn);
-  background: var(--metal);
-  padding: 14px 28px;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #1a1008;
-  box-shadow: var(--glow-cta), inset 0 1px 0 rgb(255 255 255 / 0.28);
-  animation: flicker 3.6s ease-in-out infinite;
-}
-
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-btn);
-  border: 1px solid var(--color-brass);
-  padding: 13px 27px;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-brass);
-}
-
 .link-ghost {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--color-muted);
   text-decoration: none;
+  touch-action: manipulation;
+}
+
+.btn-fill:focus-visible,
+.btn-outline:focus-visible,
+.btn-text:focus-visible,
+.nav-link:focus-visible,
+.link-ghost:focus-visible {
+  outline: 2px solid var(--color-brass-light);
+  outline-offset: 3px;
 }
 
 .link-ghost:hover {
@@ -458,7 +500,7 @@ svg.gear-scroll-slow {
   gap: 10px;
   width: min(100%, var(--page-max-width));
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--page-gutter);
 }
 
 .section-pipe {
@@ -580,8 +622,8 @@ svg.gear-scroll-slow {
 .chip {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-chip);
-  padding: 4px 10px;
-  font-size: 10px;
+  padding: 6px 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -597,8 +639,9 @@ svg.gear-scroll-slow {
 .bolt {
   display: grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: var(--metal);
   color: #1a1008;
@@ -610,18 +653,33 @@ svg.gear-scroll-slow {
 .field {
   margin-top: 8px;
   width: 100%;
+  min-height: 48px;
   border: 1px solid var(--color-line);
   border-radius: var(--radius-btn);
   background: var(--color-canvas);
-  padding: 20px;
-  font-size: 14px;
+  padding: 14px 18px;
+  font-size: 16px;
   color: var(--color-ink);
   outline: none;
 }
 
-.field:focus {
+.field:focus,
+.field:focus-visible {
   border-color: var(--color-brass);
   box-shadow: 0 0 0 3px rgb(198 161 91 / 0.16);
+}
+
+.quiz-option {
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+.toast-float {
+  bottom: 2rem;
+}
+
+body.has-cookie-banner .toast-float {
+  bottom: 8.5rem;
 }
 
 .panel-shift {
@@ -743,8 +801,47 @@ svg.gear-scroll-slow {
   .atm-gear,
   .hero-cogs,
   .section-break,
-  .spark {
+  .spark,
+  .steam {
     display: none;
+  }
+
+  .wordmark {
+    letter-spacing: 0.1em;
+  }
+}
+
+@media (min-width: 640px) {
+  .btn-fill-compact {
+    padding: 10px 14px;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  :root,
+  html[data-theme="ember"] {
+    --page-gutter: 56px;
+  }
+
+  .atm-gear {
+    display: none;
+  }
+
+  .pipe-left {
+    left: 12px;
+  }
+
+  .pipe-right {
+    right: 12px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root,
+  html[data-theme="ember"] {
+    --page-gutter: 24px;
   }
 }
 

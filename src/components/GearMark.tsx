@@ -76,6 +76,9 @@ export function GearMark({
           height={size}
           className="gear-rotor"
           draggable={false}
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
         />
       </div>
     );

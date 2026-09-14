@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { FormEvent, useEffect, useState } from "react";
 import { CONTACTS } from "@/lib/contacts";
-import { easeOut } from "@/lib/motion";
+import { easeOut, useMotionMount } from "@/lib/motion";
 import {
   quizDesigns,
   quizOrigins,
@@ -38,6 +38,7 @@ const questions = [
 
 export function Lead() {
   const reduced = useReducedMotion();
+  const mounted = useMotionMount();
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
   const [toast, setToast] = useState(false);
@@ -121,14 +122,14 @@ export function Lead() {
   const question = questions[step];
 
   return (
-    <section id="lead" className="px-5 py-20">
-      <div className="page-wrap grid gap-12 lg:grid-cols-2">
+    <section id="lead" className="py-14 md:py-20">
+      <div className="page-wrap grid gap-10 lg:grid-cols-2 lg:gap-12">
         <Reveal>
           <h2 className="display-sm">Есть задача?</h2>
-          <p className="mt-6 max-w-md text-[16px] leading-[1.45] text-muted">
+          <p className="mt-5 max-w-md text-[16px] leading-normal text-muted md:mt-6">
             Расскажите о ней своими словами.
           </p>
-          <p className="mt-4 max-w-md text-[16px] leading-[1.45] text-muted">
+          <p className="mt-4 max-w-md text-[16px] leading-normal text-muted">
             Необязательно знать технические термины, иметь готовое ТЗ или точно
             понимать, какой сайт вам нужен.
           </p>
@@ -156,7 +157,7 @@ export function Lead() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <form onSubmit={onSubmit} className="card-surface min-h-[616px] p-6">
+          <form onSubmit={onSubmit} className="card-surface p-5 md:p-6">
             <div className="mb-5 flex min-h-7 items-center justify-between gap-4">
               {step > 0 ? (
                 <button
@@ -186,7 +187,7 @@ export function Lead() {
               {question ? (
                 <motion.div
                   key={question.key}
-                  initial={reduced ? false : { opacity: 0, y: 8 }}
+                  initial={mounted && !reduced ? { opacity: 0, y: 8 } : false}
                   animate={{ opacity: 1, y: 0 }}
                   exit={reduced ? undefined : { opacity: 0, y: -6 }}
                   transition={{ duration: 0.35, ease: easeOut }}
@@ -201,9 +202,9 @@ export function Lead() {
                         <button
                           key={option}
                           type="button"
-                          className={`cursor-pointer rounded-[18px] border px-4 py-3 text-left text-[14px] leading-[1.35] ${
+                          className={`quiz-option cursor-pointer rounded-[18px] border px-4 py-3.5 text-left text-[14px] leading-snug ${
                             selected
-                              ? "border-bronze text-ink"
+                              ? "border-bronze bg-canvas text-ink"
                               : "border-line text-muted"
                           }`}
                           aria-pressed={selected}
@@ -218,7 +219,7 @@ export function Lead() {
               ) : (
                 <motion.div
                   key="contacts"
-                  initial={reduced ? false : { opacity: 0, y: 8 }}
+                  initial={mounted && !reduced ? { opacity: 0, y: 8 } : false}
                   animate={{ opacity: 1, y: 0 }}
                   exit={reduced ? undefined : { opacity: 0, y: -6 }}
                   transition={{ duration: 0.35, ease: easeOut }}
@@ -229,6 +230,7 @@ export function Lead() {
                       name="name"
                       value={name}
                       onChange={(event) => setName(event.target.value)}
+                      autoComplete="name"
                       required
                       minLength={2}
                       maxLength={80}
@@ -241,6 +243,7 @@ export function Lead() {
                       name="contact"
                       value={contact}
                       onChange={(event) => setContact(event.target.value)}
+                      autoComplete="on"
                       required
                       minLength={3}
                       maxLength={120}
@@ -294,7 +297,7 @@ export function Lead() {
 
       <AnimatePresence>
         {toast ? (
-          <div className="pointer-events-none fixed inset-x-0 bottom-8 z-50 flex justify-center px-5">
+          <div className="toast-float pointer-events-none fixed inset-x-0 z-50 flex justify-center px-5">
             <motion.p
               role="status"
               className="rounded-[22px] border border-line bg-surface px-6 py-4 text-[14px] font-semibold text-bronze"

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main className="page-wrap max-w-2xl px-5 py-20">
+    <main className="page-wrap max-w-2xl py-20">
       <Link href="/" className="wordmark inline-flex items-center gap-2">
         <GearMark id="mark-privacy" size={18} teeth={10} className="gear-scroll-slow" />
         {CONTACTS.brand}

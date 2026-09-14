@@ -57,7 +57,7 @@ export function Faq() {
   const reduced = useReducedMotion();
 
   return (
-    <section id="faq" className="px-5 py-20">
+    <section id="faq" className="py-14 md:py-20">
       <div className="page-wrap max-w-3xl">
         <Reveal className="text-center">
           <h2 className="display-sm">Частые вопросы</h2>
@@ -69,7 +69,7 @@ export function Faq() {
               <div key={item.q}>
                 <button
                   type="button"
-                  className="flex w-full cursor-pointer items-center justify-between gap-6 py-5 text-left text-[16px] font-semibold leading-[1.38]"
+                  className="flex min-h-11 w-full cursor-pointer items-center justify-between gap-6 py-5 text-left text-[16px] font-semibold leading-snug"
                   onClick={() => setOpen(isOpen ? -1 : index)}
                   aria-expanded={isOpen}
                 >
@@ -92,7 +92,7 @@ export function Faq() {
                       {item.a.map((paragraph) => (
                         <p
                           key={paragraph}
-                          className="mt-2 text-[14px] leading-[1.4] text-muted first:mt-0"
+                          className="mt-2 text-[14px] leading-normal text-muted first:mt-0"
                         >
                           {paragraph}
                         </p>

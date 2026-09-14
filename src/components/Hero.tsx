@@ -8,16 +8,16 @@ export function Hero() {
   const reduced = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden px-5 pb-16 pt-14 md:pb-24 md:pt-20">
+    <section className="relative overflow-x-clip pb-14 pt-10 md:pb-24 md:pt-20">
       <div className="horizon" aria-hidden />
 
       <motion.div
         className="page-wrap relative flex flex-col items-center text-center"
         variants={reduced ? undefined : stagger}
-        initial={reduced ? false : "hidden"}
+        initial={false}
         animate="show"
       >
-        <div className="hero-cogs hidden lg:block" aria-hidden>
+        <div className="hero-cogs hidden xl:block" aria-hidden>
           <GearMark
             id="hero-left"
             size={88}
@@ -32,21 +32,21 @@ export function Hero() {
           />
         </div>
 
-        <h1 className="display max-w-5xl">
+        <h1 className="display max-w-5xl text-balance">
           <motion.span className="block" variants={reduced ? undefined : fadeUp}>
             Делаем сайты и веб-сервисы для бизнеса
           </motion.span>
         </h1>
 
         <motion.p
-          className="mt-6 max-w-2xl text-base leading-[1.38] text-muted"
+          className="mt-5 max-w-2xl text-base leading-normal text-muted md:mt-6"
           variants={reduced ? undefined : fadeUp}
         >
           От простой страницы до интернет-магазина или сложного личного кабинета.
         </motion.p>
 
         <motion.p
-          className="mt-4 max-w-2xl text-base leading-[1.45] text-muted"
+          className="mt-3 max-w-2xl text-base leading-normal text-muted md:mt-4"
           variants={reduced ? undefined : fadeUp}
         >
           Поможем разобраться с задачей, спроектируем, разработаем и запустим.
@@ -55,7 +55,7 @@ export function Hero() {
 
         <motion.a
           href="#lead"
-          className="btn-fill mt-8"
+          className="btn-fill mt-7 md:mt-8"
           variants={reduced ? undefined : fadeUp}
           whileHover={reduced ? undefined : { y: -1 }}
           whileTap={reduced ? undefined : { scale: 0.98 }}
