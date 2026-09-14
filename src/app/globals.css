@@ -594,7 +594,7 @@ svg.gear-scroll-slow {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-btn);
   background: var(--color-canvas);
-  padding: 10px 12px;
+  padding: 20px;
   font-size: 14px;
   color: var(--color-ink);
   outline: none;

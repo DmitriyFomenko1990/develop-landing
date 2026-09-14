@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { CONTACTS } from "@/lib/contacts";
 import { easeOut } from "@/lib/motion";
 import {
@@ -14,7 +14,7 @@ import {
 } from "@/lib/quiz";
 import { Reveal } from "@/components/Reveal";
 
-type Status = "idle" | "sending" | "done" | "error";
+type Status = "idle" | "sending" | "error";
 
 const fieldClass = "field";
 
@@ -40,6 +40,7 @@ export function Lead() {
   const reduced = useReducedMotion();
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  const [toast, setToast] = useState(false);
   const [step, setStep] = useState(0);
   const [project, setProject] = useState<QuizProject | "">("");
   const [origin, setOrigin] = useState<QuizOrigin | "">("");
@@ -47,6 +48,14 @@ export function Lead() {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [task, setTask] = useState("");
+
+  useEffect(() => {
+    if (!toast) {
+      return;
+    }
+    const timer = window.setTimeout(() => setToast(false), 4000);
+    return () => window.clearTimeout(timer);
+  }, [toast]);
 
   const answers = { project, origin, design };
 
@@ -105,7 +114,8 @@ export function Lead() {
     }
 
     resetForm();
-    setStatus("done");
+    setStatus("idle");
+    setToast(true);
   }
 
   const question = questions[step];
@@ -251,7 +261,12 @@ export function Lead() {
                   <p className="mt-4 text-[12px] leading-relaxed text-subtle">
                     Отправляя форму, вы соглашаетесь на обработку данных, чтобы вам
                     ответили.{" "}
-                    <a className="link-ghost" href="/privacy">
+                    <a
+                      className="link-ghost"
+                      href="/privacy"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       Политика
                     </a>
                   </p>
@@ -272,35 +287,29 @@ export function Lead() {
               </button>
             ) : null}
 
-            <AnimatePresence mode="wait">
-              {status === "done" ? (
-                <motion.p
-                  key="done"
-                  className="mt-4 text-[14px] text-bronze"
-                  initial={reduced ? false : { opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={reduced ? undefined : { opacity: 0 }}
-                  transition={{ duration: 0.35, ease: easeOut }}
-                >
-                  Заявка ушла. Если открылся мессенджер — отправьте черновик.
-                </motion.p>
-              ) : null}
-              {status === "error" ? (
-                <motion.p
-                  key="error"
-                  className="mt-4 text-[14px] text-bronze"
-                  initial={reduced ? false : { opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={reduced ? undefined : { opacity: 0 }}
-                  transition={{ duration: 0.35, ease: easeOut }}
-                >
-                  {error}
-                </motion.p>
-              ) : null}
-            </AnimatePresence>
+            {status === "error" ? (
+              <p className="mt-4 text-[14px] text-bronze">{error}</p>
+            ) : null}
           </form>
         </Reveal>
       </div>
+
+      <AnimatePresence>
+        {toast ? (
+          <div className="pointer-events-none fixed inset-x-0 bottom-8 z-50 flex justify-center px-5">
+            <motion.p
+              role="status"
+              className="rounded-[22px] border border-line bg-surface px-6 py-4 text-[14px] font-semibold text-bronze"
+              initial={reduced ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduced ? undefined : { opacity: 0, y: 8 }}
+              transition={{ duration: 0.4, ease: easeOut }}
+            >
+              Заявка отправлена
+            </motion.p>
+          </div>
+        ) : null}
+      </AnimatePresence>
     </section>
   );
 }

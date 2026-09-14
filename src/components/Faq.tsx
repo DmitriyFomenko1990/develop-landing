@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 import { easeOut } from "@/lib/motion";
 import { Reveal } from "@/components/Reveal";
@@ -77,21 +77,18 @@ export function Faq() {
                   <motion.span
                     className="bolt"
                     animate={{ rotate: isOpen ? 45 : 0 }}
-                    transition={{ duration: 0.3, ease: easeOut }}
+                    transition={{ duration: reduced ? 0 : 0.3, ease: easeOut }}
                   >
                     +
                   </motion.span>
                 </button>
-                <AnimatePresence initial={false}>
-                  {isOpen ? (
-                    <motion.div
-                      key={item.q}
-                      className="overflow-hidden pb-5"
-                      initial={reduced ? false : { height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={reduced ? undefined : { height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: easeOut }}
-                    >
+                <div
+                  className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:duration-0 ${
+                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="min-h-0 overflow-hidden">
+                    <div className="pb-5">
                       {item.a.map((paragraph) => (
                         <p
                           key={paragraph}
@@ -100,9 +97,9 @@ export function Faq() {
                           {paragraph}
                         </p>
                       ))}
-                    </motion.div>
-                  ) : null}
-                </AnimatePresence>
+                    </div>
+                  </div>
+                </div>
               </div>
             );
           })}
