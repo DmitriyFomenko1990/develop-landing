@@ -26,7 +26,7 @@ export function Atmosphere() {
         kind="thick"
         className="atm-gear atm-gear-b gear-scroll-rev"
       />
-     
+
       <div className="steam steam-a" />
       <div className="steam steam-b" />
       <div className="steam steam-c" />

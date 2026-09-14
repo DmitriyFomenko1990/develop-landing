@@ -156,19 +156,30 @@ export function Lead() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <form onSubmit={onSubmit} className="card-surface p-6">
-            <div className="mb-5 flex items-center justify-between gap-4">
-              <div className="flex items-center gap-2" aria-hidden>
+          <form onSubmit={onSubmit} className="card-surface min-h-[616px] p-6">
+            <div className="mb-5 flex min-h-7 items-center justify-between gap-4">
+              {step > 0 ? (
+                <button
+                  type="button"
+                  className="link-ghost cursor-pointer text-[12px] font-semibold uppercase tracking-[0.071em]"
+                  onClick={() => {
+                    setStatus("idle");
+                    setStep((current) => Math.max(current - 1, 0));
+                  }}
+                >
+                  ← Назад
+                </button>
+              ) : (
+                <span />
+              )}
+              <div className="quiz-steps" aria-hidden>
                 {[0, 1, 2, 3].map((index) => (
                   <span
                     key={index}
-                    className={index <= step ? "lamp lamp-on" : "lamp"}
+                    className={index <= step ? "quiz-dot quiz-dot-on" : "quiz-dot"}
                   />
                 ))}
               </div>
-              <p className="text-[12px] font-semibold uppercase tracking-[0.071em] text-muted">
-                {step + 1} / 4
-              </p>
             </div>
 
             <AnimatePresence mode="wait">
@@ -273,19 +284,6 @@ export function Lead() {
                 </motion.div>
               )}
             </AnimatePresence>
-
-            {step > 0 ? (
-              <button
-                type="button"
-                className="link-ghost mt-5 cursor-pointer text-[12px] font-semibold uppercase tracking-[0.071em]"
-                onClick={() => {
-                  setStatus("idle");
-                  setStep((current) => Math.max(current - 1, 0));
-                }}
-              >
-                Назад
-              </button>
-            ) : null}
 
             {status === "error" ? (
               <p className="mt-4 text-[14px] text-bronze">{error}</p>

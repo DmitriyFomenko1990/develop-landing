@@ -516,6 +516,25 @@ svg.gear-scroll-slow {
   animation: lamp 2.8s ease-in-out infinite;
 }
 
+.quiz-steps {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.quiz-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #6a6158;
+}
+
+.quiz-dot-on {
+  background: #f0d9a0;
+}
+
 .gauge {
   display: grid;
   justify-items: center;
