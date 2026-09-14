@@ -51,6 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="ru"
       data-theme="ember"
+      data-scroll-behavior="smooth"
       className={`${sans.variable} ${display.variable} ${serif.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-canvas text-ink">

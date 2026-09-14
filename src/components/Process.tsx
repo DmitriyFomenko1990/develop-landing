@@ -64,36 +64,40 @@ export function Process() {
             самостоятельно.
           </p>
         </Reveal>
-        <motion.div
-          className="mt-10 grid gap-x-16 md:mt-14 md:grid-cols-2"
+        <motion.ol
+          className="timeline mx-auto mt-10 max-w-3xl md:mt-14"
           variants={reduced ? undefined : stagger}
           initial={mounted && !reduced ? "hidden" : false}
           whileInView="show"
           viewport={view}
         >
           {steps.map((item, index) => (
-            <motion.article
+            <motion.li
               key={item.title}
               variants={reduced ? undefined : fadeUp}
-              className="border-t border-line py-6 md:py-8"
+              className="timeline-item"
             >
+              <span
+                className="lamp timeline-lamp lamp-on"
+                style={{ animationDelay: `${index * 0.18}s` }}
+              />
               <p className="eyebrow text-bronze">
                 {String(index + 1).padStart(2, "0")}
               </p>
-              <h3 className="mt-3 text-[20px] font-semibold leading-snug">
+              <h3 className="mt-2 text-[20px] font-semibold leading-snug">
                 {item.title}
               </h3>
               {item.text.map((paragraph) => (
                 <p
                   key={paragraph}
-                  className="mt-2 max-w-md text-[14px] leading-normal text-muted"
+                  className="mt-2 max-w-xl text-[14px] leading-normal text-muted"
                 >
                   {paragraph}
                 </p>
               ))}
-            </motion.article>
+            </motion.li>
           ))}
-        </motion.div>
+        </motion.ol>
       </div>
     </section>
   );

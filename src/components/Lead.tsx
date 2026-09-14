@@ -157,22 +157,26 @@ export function Lead() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <form onSubmit={onSubmit} className="card-surface p-5 md:p-6">
-            <div className="mb-5 flex min-h-7 items-center justify-between gap-4">
-              {step > 0 ? (
-                <button
-                  type="button"
-                  className="link-ghost cursor-pointer text-[12px] font-semibold uppercase tracking-[0.071em]"
-                  onClick={() => {
-                    setStatus("idle");
-                    setStep((current) => Math.max(current - 1, 0));
-                  }}
-                >
-                  ← Назад
-                </button>
-              ) : (
-                <span />
-              )}
+          <form onSubmit={onSubmit} className="card-surface instrument">
+            <div className="instrument-head">
+              <div className="flex min-h-11 min-w-0 items-center gap-3">
+                {step > 0 ? (
+                  <button
+                    type="button"
+                    className="link-ghost cursor-pointer text-[12px] font-semibold uppercase tracking-[0.071em]"
+                    onClick={() => {
+                      setStatus("idle");
+                      setStep((current) => Math.max(current - 1, 0));
+                    }}
+                  >
+                    ← Назад
+                  </button>
+                ) : null}
+                <span className="lamp lamp-on" />
+                <p className="truncate text-[12px] font-semibold text-ink">
+                  {question ? question.title : "Есть задача?"}
+                </p>
+              </div>
               <div className="quiz-steps" aria-hidden>
                 {[0, 1, 2, 3].map((index) => (
                   <span
@@ -183,7 +187,8 @@ export function Lead() {
               </div>
             </div>
 
-            <AnimatePresence mode="wait">
+            <div className="p-5 md:p-6">
+              <AnimatePresence mode="wait">
               {question ? (
                 <motion.div
                   key={question.key}
@@ -202,10 +207,8 @@ export function Lead() {
                         <button
                           key={option}
                           type="button"
-                          className={`quiz-option cursor-pointer rounded-[18px] border px-4 py-3.5 text-left text-[14px] leading-snug ${
-                            selected
-                              ? "border-bronze bg-canvas text-ink"
-                              : "border-line text-muted"
+                          className={`quiz-option cursor-pointer border px-4 py-3.5 text-left text-[14px] leading-snug ${
+                            selected ? "quiz-option-on" : "border-line text-muted"
                           }`}
                           aria-pressed={selected}
                           onClick={() => onChoose(question.key, option)}
@@ -286,29 +289,30 @@ export function Lead() {
                   </p>
                 </motion.div>
               )}
-            </AnimatePresence>
+              </AnimatePresence>
 
-            {status === "error" ? (
-              <p className="mt-4 text-[14px] text-bronze">{error}</p>
-            ) : null}
+              {status === "error" ? (
+                <p className="mt-4 text-[14px] text-bronze">{error}</p>
+              ) : null}
+            </div>
           </form>
         </Reveal>
       </div>
 
       <AnimatePresence>
         {toast ? (
-          <div className="toast-float pointer-events-none fixed inset-x-0 z-50 flex justify-center px-5">
-            <motion.p
-              role="status"
-              className="rounded-[22px] border border-line bg-surface px-6 py-4 text-[14px] font-semibold text-bronze"
-              initial={reduced ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduced ? undefined : { opacity: 0, y: 8 }}
-              transition={{ duration: 0.4, ease: easeOut }}
-            >
+          <motion.div
+            key="lead-toast"
+            className="toast-float pointer-events-none fixed inset-x-0 z-50 flex justify-center px-5"
+            initial={reduced ? false : { opacity: 0, y: 28, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={reduced ? { opacity: 0 } : { opacity: 0, y: 18, scale: 0.98 }}
+            transition={{ duration: 0.5, ease: easeOut }}
+          >
+            <p role="status" className="toast-plate">
               Заявка отправлена
-            </motion.p>
-          </div>
+            </p>
+          </motion.div>
         ) : null}
       </AnimatePresence>
     </section>

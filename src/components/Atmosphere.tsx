@@ -4,6 +4,7 @@ export function Atmosphere() {
   return (
     <div className="atmosphere" aria-hidden>
       <div className="ember-core" />
+      <div className="grain" />
       <div className="pipe pipe-left">
         <span className="pipe-joint" />
         <span className="pipe-joint pipe-joint-mid" />

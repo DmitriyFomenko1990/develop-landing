@@ -37,13 +37,6 @@ const items = [
     ],
   },
   {
-    q: "Вы работаете только с новыми проектами?",
-    a: [
-      "Нет.",
-      "Можно прийти с существующим сайтом, который нужно исправить, ускорить, переделать или дополнить.",
-    ],
-  },
-  {
     q: "Что нужно подготовить перед обращением?",
     a: [
       "Ничего особенного.",
@@ -62,7 +55,7 @@ export function Faq() {
         <Reveal className="text-center">
           <h2 className="display-sm">Частые вопросы</h2>
         </Reveal>
-        <div className="mt-10 divide-y divide-line border-y border-line">
+        <div className="card-surface mt-10 divide-y divide-line overflow-hidden px-5 md:px-7">
           {items.map((item, index) => {
             const isOpen = open === index;
             return (

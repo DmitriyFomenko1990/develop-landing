@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { fadeUp, stagger, useMotionMount, view } from "@/lib/motion";
+import { easeOut, fadeUp, stagger, useMotionMount, view } from "@/lib/motion";
 import { Reveal } from "@/components/Reveal";
 
 const items = [
@@ -33,13 +33,7 @@ const items = [
       "Также можем заниматься поддержкой и развитием проекта после запуска.",
     ],
   },
-  {
-    title: "«У меня нет нормального технического задания»",
-    text: [
-      "Ничего страшного.",
-      "На первом этапе достаточно рассказать, что вы хотите получить. Остальное поможем сформулировать.",
-    ],
-  },
+
 ];
 
 export function Pains() {
@@ -53,28 +47,26 @@ export function Pains() {
           <h2 className="display-sm">Что обычно беспокоит перед началом</h2>
         </Reveal>
         <motion.div
-          className="mt-10 grid gap-x-16 md:mt-14 md:grid-cols-2"
+          className="mt-10 grid gap-4 md:mt-14 md:grid-cols-2"
           variants={reduced ? undefined : stagger}
           initial={mounted && !reduced ? "hidden" : false}
           whileInView="show"
           viewport={view}
         >
-          {items.map((item, index) => (
+          {items.map((item) => (
             <motion.article
               key={item.title}
               variants={reduced ? undefined : fadeUp}
-              className="border-t border-line py-6 md:py-8"
+              className="card-surface quote-plate panel-shift"
+              whileHover={
+                reduced ? undefined : { y: -3, transition: { duration: 0.25, ease: easeOut } }
+              }
             >
-              <p className="eyebrow text-bronze">
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mt-3 text-[20px] font-semibold leading-snug">
-                {item.title}
-              </h3>
+              <h3>{item.title}</h3>
               {item.text.map((paragraph) => (
                 <p
                   key={paragraph}
-                  className="mt-2 max-w-md text-[14px] leading-normal text-muted"
+                  className="mt-3 text-[14px] leading-normal text-muted"
                 >
                   {paragraph}
                 </p>

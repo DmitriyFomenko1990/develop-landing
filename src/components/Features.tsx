@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { fadeUp, stagger, useMotionMount, view } from "@/lib/motion";
+import { easeOut, fadeUp, stagger, useMotionMount, view } from "@/lib/motion";
 import { Reveal } from "@/components/Reveal";
 
 const services = [
@@ -40,13 +40,9 @@ export function Features() {
       <div className="page-wrap">
         <Reveal className="mx-auto max-w-3xl text-center">
           <h2 className="display-sm">Что можем сделать</h2>
-          <p className="editorial mx-auto mt-5 max-w-xl text-muted md:mt-6">
-            Не обязательно заранее знать, какой именно сайт вам нужен.
-            Расскажите, чего хотите добиться, а мы предложим подходящий вариант.
-          </p>
         </Reveal>
         <motion.div
-          className="mt-10 grid gap-x-16 md:mt-14 md:grid-cols-2"
+          className="mt-10 grid gap-4 md:mt-14 md:grid-cols-2 xl:grid-cols-3"
           variants={reduced ? undefined : stagger}
           initial={mounted && !reduced ? "hidden" : false}
           whileInView="show"
@@ -56,7 +52,11 @@ export function Features() {
             <motion.article
               key={item.title}
               variants={reduced ? undefined : fadeUp}
-              className="border-t border-line py-6 md:py-8"
+              className="card-surface panel-shift p-6 pt-7"
+              whileHover={
+                reduced ? undefined : { y: -4, transition: { duration: 0.25, ease: easeOut } }
+              }
+              whileTap={reduced ? undefined : { scale: 0.99 }}
             >
               <p className="eyebrow text-bronze">
                 {String(index + 1).padStart(2, "0")}
@@ -64,7 +64,7 @@ export function Features() {
               <h3 className="mt-3 text-[20px] font-semibold leading-snug">
                 {item.title}
               </h3>
-              <p className="mt-2 max-w-md text-[14px] leading-normal text-muted">
+              <p className="mt-2 text-[14px] leading-normal text-muted">
                 {item.text}
               </p>
             </motion.article>

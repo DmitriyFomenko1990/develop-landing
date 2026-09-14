@@ -21,8 +21,6 @@ export default function Home() {
         <Process />
         <SectionBreak id="break-pains" kind="thick" />
         <Pains />
-        <SectionBreak id="break-invite" kind="clockwork" />
-        <Invite />
         <SectionBreak id="break-faq" kind="thick" />
         <Faq />
         <SectionBreak id="break-lead" kind="clockwork" />
