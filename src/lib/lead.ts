@@ -5,6 +5,9 @@ export type LeadPayload = {
   name: string;
   contact: string;
   task: string;
+  project?: string;
+  origin?: string;
+  design?: string;
 };
 
 function oneLine(value: string) {
@@ -15,14 +18,28 @@ function encodeSubject(value: string) {
   return `=?UTF-8?B?${Buffer.from(value, "utf8").toString("base64")}?=`;
 }
 
-export function formatLeadMessage({ name, contact, task }: LeadPayload) {
+export function formatLeadMessage({
+  name,
+  contact,
+  task,
+  project,
+  origin,
+  design,
+}: LeadPayload) {
+  const quiz = [
+    project ? `Проект: ${project}` : "",
+    origin ? `Старт: ${origin}` : "",
+    design ? `Дизайн: ${design}` : "",
+  ].filter(Boolean);
+
   return [
     "Новая заявка с лендинга",
     "",
     `Имя: ${name}`,
     `Контакт: ${contact}`,
+    ...(quiz.length ? ["", ...quiz] : []),
     "",
-    "Задача:",
+    "Сообщение:",
     task,
   ].join("\n");
 }
@@ -118,6 +135,29 @@ async function sendSmtp(text: string, to: string, from: string) {
     return true;
   } catch {
     socket.destroy();
+    return false;
+  }
+}
+
+export async function sendLeadTelegram(text: string) {
+  const url = process.env.LEAD_RELAY_URL?.trim();
+  const secret = process.env.LEAD_RELAY_SECRET?.trim();
+  if (!url || !secret) {
+    return false;
+  }
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Relay-Secret": secret,
+      },
+      body: JSON.stringify({ text }),
+      signal: AbortSignal.timeout(12000),
+    });
+    return response.ok;
+  } catch {
     return false;
   }
 }

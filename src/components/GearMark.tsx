@@ -10,7 +10,7 @@ type GearMarkProps = {
 
 const PHOTOS: Record<Exclude<GearKind, "svg">, string> = {
   clockwork: "/images/gears/clockwork.png?v=5",
-  thick: "/images/gears/thick.png?v=5",
+  thick: "/images/gears/clockwork.png?v=5",
 };
 
 function splitGearClass(className?: string) {

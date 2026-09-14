@@ -1,42 +1,48 @@
 import { Gauge } from "@/components/Gauge";
 
 const nav = [
-  { label: "Вид", on: true },
-  { label: "Страницы", on: false },
-  { label: "Сборка", on: false },
-  { label: "Ссылка", on: false },
-  { label: "Дальше", on: false },
+  { label: "Детали", on: true },
+  { label: "Оценка", on: false },
+  { label: "Дизайн", on: false },
+  { label: "Разработка", on: false },
+  { label: "Поддержка", on: false },
 ];
 
 const feed = [
   {
-    title: "Вид сайта",
-    meta: "Поможем выбрать, как будет выглядеть",
-    state: "вместе",
+    title: "Детали",
+    meta: "Связываемся, обсуждаем задачу, сценарии и технические нюансы.",
+    state: "обсуждаем",
   },
   {
-    title: "Страницы",
-    meta: "Кто вы, что предлагаете, как с вами связаться",
+    title: "Оценка и стоимость",
+    meta: "Оцениваем задачу и договариваемся о стоимости работ.",
+    state: "договариваемся",
+  },
+  {
+    title: "Дизайн",
+    meta: "Разрабатываем и согласовываем дизайн.",
+    state: "согласовываем",
+  },
+  {
+    title: "Разработка",
+    meta: "Начинаем разработку и доводим до готового продукта.",
     state: "собираем",
   },
   {
-    title: "Сборка",
-    meta: "Показываем по ходу, не в последний день",
-    state: "в работе",
-  },
-  {
-    title: "Рабочая ссылка",
-    meta: "Можно открыть и отправить клиенту",
-    state: "открываем",
-  },
-  {
-    title: "Подключения",
-    meta: "Другие сервисы, уведомления, боты — если нужно",
-    state: "по задаче",
+    title: "Поддержка",
+    meta: "Дальше: поддержка, улучшения, новый функционал.",
+    state: "опционально",
   },
 ];
 
-const chips = ["Вид", "Сборка", "Ссылка", "Мессенджеры", "Уведомления", "Боты"];
+const chips = [
+  "Детали",
+  "Оценка",
+  "Дизайн",
+  "Разработка",
+  "Поддержка",
+];
 
 export function CapabilityBoard() {
   return (
@@ -46,10 +52,12 @@ export function CapabilityBoard() {
           <span className="lamp lamp-on" />
           <div>
             <p className="text-[12px] font-semibold text-ink">Что входит</p>
-            <p className="mt-0.5 text-[11px] text-subtle">От вида до рабочей ссылки</p>
+            <p className="mt-0.5 text-[11px] text-subtle">
+              От дизайна до готового продукта
+            </p>
           </div>
         </div>
-        <p className="eyebrow hidden sm:inline-flex">одна команда</p>
+        <p className="eyebrow hidden sm:inline-flex">ход проекта</p>
       </div>
 
       <div className="grid min-h-105 lg:grid-cols-[200px_1fr_240px]">
@@ -69,7 +77,7 @@ export function CapabilityBoard() {
         </aside>
 
         <div className="p-5">
-          <p className="eyebrow">На старте</p>
+          <p className="eyebrow">Как идём</p>
           <ul className="mt-3 flex flex-wrap gap-2">
             {chips.map((chip, index) => (
               <li key={chip} className={index === 0 ? "chip chip-on" : "chip"}>
@@ -102,9 +110,9 @@ export function CapabilityBoard() {
         <aside className="hidden border-l border-line p-5 lg:block">
           <p className="eyebrow">Ход</p>
           <div className="mt-5 grid grid-cols-1 gap-4">
-            <Gauge value={92} label="Вид" />
-            <Gauge value={88} label="Сборка" />
-            <Gauge value={76} label="Ссылка" />
+            <Gauge value={92} label="Детали" />
+            <Gauge value={88} label="Дизайн" />
+            <Gauge value={76} label="Продукт" />
           </div>
         </aside>
       </div>

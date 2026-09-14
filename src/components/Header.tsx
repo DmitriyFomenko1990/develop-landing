@@ -5,13 +5,6 @@ import Link from "next/link";
 import { GearMark } from "@/components/GearMark";
 import { CONTACTS } from "@/lib/contacts";
 
-const links = [
-  { href: "#capabilities", label: "Что берём" },
-  { href: "#process", label: "Как делаем" },
-  { href: "#case", label: "Пример" },
-  { href: "#pricing", label: "Цены" },
-];
-
 export function Header() {
   const reduced = useReducedMotion();
 
@@ -22,33 +15,14 @@ export function Header() {
           <GearMark id="mark-header" size={18} teeth={10} className="gear-scroll-slow" />
           {CONTACTS.brand}
         </Link>
-        <nav className="hidden md:flex">
-          <div className="nav-rail">
-            {links.map((link) => (
-              <a key={link.href} href={link.href} className="nav-link py-1.5">
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </nav>
-        <div className="flex items-center gap-3">
-          <a
-            href={CONTACTS.telegramUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-text hidden md:inline-flex"
-          >
-            Написать
-          </a>
-          <motion.a
-            href="#lead"
-            className="btn-fill px-4 py-2.5 text-[11px] md:px-5 md:text-[12px]"
-            whileHover={reduced ? undefined : { y: -1 }}
-            whileTap={reduced ? undefined : { scale: 0.98 }}
-          >
-            Написать, что нужно
-          </motion.a>
-        </div>
+        <motion.a
+          href="#lead"
+          className="btn-fill px-4 py-2.5 text-[11px] md:px-5 md:text-[12px]"
+          whileHover={reduced ? undefined : { y: -1 }}
+          whileTap={reduced ? undefined : { scale: 0.98 }}
+        >
+          Обсудить проект
+        </motion.a>
       </div>
     </header>
   );
